@@ -9,7 +9,7 @@ import numpy as np
 from scipy.io.wavfile import read
 import torch
 
-MATPLOTLIB_FLAG = False
+MATPLOTLIB_FLAG = True
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 logger = logging
@@ -54,6 +54,10 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path)
               'iteration': iteration,
               'optimizer': optimizer.state_dict(),
               'learning_rate': learning_rate}, checkpoint_path)
+
+def delete_checkpoint(checkpoint_path):
+  logger.info("Delete previous model  {}".format(checkpoint_path))
+  os.remove(checkpoint_path)
 
 
 def summarize(writer, global_step, scalars={}, histograms={}, images={}, audios={}, audio_sampling_rate=22050):
