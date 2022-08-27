@@ -56,8 +56,11 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path)
               'learning_rate': learning_rate}, checkpoint_path)
 
 def delete_checkpoint(checkpoint_path):
-  logger.info("Delete previous model  {}".format(checkpoint_path))
-  os.remove(checkpoint_path)
+  if os.path.exists(checkpoint_path):
+    logger.info("Delete previous model  {}".format(checkpoint_path))
+    os.remove(checkpoint_path)
+  else:
+    logger.info("No previous model  {}".format(checkpoint_path))
 
 
 def summarize(writer, global_step, scalars={}, histograms={}, images={}, audios={}, audio_sampling_rate=22050):
