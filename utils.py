@@ -58,6 +58,8 @@ def save_checkpoint(model, optimizer, learning_rate, iteration, checkpoint_path)
 def delete_checkpoint(checkpoint_path):
   if os.path.exists(checkpoint_path):
     logger.info("Delete previous model  {}".format(checkpoint_path))
+    with open(checkpoint_path,"w",encoding="utf-8") as tempf:
+      pass
     os.remove(checkpoint_path)
   else:
     logger.info("No previous model  {}".format(checkpoint_path))
